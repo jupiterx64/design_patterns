@@ -213,3 +213,25 @@ $bakerFactory->bake(new Donut);
 
 echo '<hr>';
 #### END OF FACTORY METHOD ####
+
+#### PROTOTYPE ####
+# eBook, OReilly Learning PHP Design Patterns, quote:
+# "The Prototype design pattern is interesting in its use of a cloning technique to replicate instantiated objects"
+# Create prototype, basic object setup, setup that works in most situations
+# and clone it once it's needed to create some "special cases"
+# Clones DO NOT call constructors, ever.
+
+use DP\Prototype\ConcretePrototype1;
+
+echo 'Prototype:' . '<br>'. '<br>';
+
+$original = new ConcretePrototype1;
+$original->displayName();
+
+$copy = clone $original;
+$copy->displayName(); // still keeps the original value! until we change it
+$copy->name = 'Changed to copy name'; // should use getters/setters instead of direct access!
+$copy->displayName();
+
+echo '<hr>';
+#### END OF PROTOTYPE
