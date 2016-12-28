@@ -18,7 +18,7 @@ class DB
         $this->db_pwd = 'dbpwd';
 
         // OPEN AND CREATE CONNECTION TO DB
-        echo 'Created connection...';
+        echo 'Created connection...' . '<br>';
     }
 
     // If there IS instance of this class already, use it!

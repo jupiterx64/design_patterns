@@ -12,7 +12,7 @@ class FacebookAdapter
         $this->facebook = $facebook;
     }
 
-    // All changes should be done here, in one place!
+    // All changes should be done here!
     // Everytime Facebook changes something, we just need to ADAPT it here!
     public function myPost($msg) {
         $this->facebook->postChanged($msg);
