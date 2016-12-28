@@ -1,6 +1,6 @@
 <?php
 
-namespace DP\Adapter\ExternalLibraries;
+namespace DP\Adapter\SimpleOne\ExternalLibraries;
 
 class Facebook
 {

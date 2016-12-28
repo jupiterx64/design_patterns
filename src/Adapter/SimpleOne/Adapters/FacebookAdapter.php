@@ -1,8 +1,8 @@
 <?php
 
-namespace DP\Adapter\Adapters;
+namespace DP\Adapter\SimpleOne\Adapters;
 
-use DP\Adapter\ExternalLibraries\Facebook;
+use DP\Adapter\SimpleOne\ExternalLibraries\Facebook;
 
 class FacebookAdapter
 {

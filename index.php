@@ -26,21 +26,31 @@ echo '<hr>';
 # Adapter adapts two incompatible interfaces!
 # Adapter adapts "two things"
 
-use DP\Adapter\ExternalLibraries\Facebook;
-use DP\Adapter\Adapters\FacebookAdapter;
+use DP\Adapter\SimpleOne\ExternalLibraries\Facebook;
+use DP\Adapter\SimpleOne\Adapters\FacebookAdapter;
+use DP\Adapter\CompositionAdapter\Desktop;
+use DP\Adapter\CompositionAdapter\Adapters\Mobile;
+use DP\Adapter\CompositionAdapter\Adapters\MobileAdapter;
 
-echo 'Adapter:' . '<br>'. '<br>';
-
-// Wrong approach!
-// Even you can, you should not directly call Facebook's methods/functions, call our own instead!
-//
-// $facebook = new Facebook;
-// $facebook->makePost('some msg');
+echo 'Adapter (simple):' . '<br>'. '<br>';
 
 // Once facebook changes something, so it becomes no longer compatible to our application
 // we need to adapt these changes in FacebookAdapter class
+// Caution! Adapter with API changes should be used with caution! (it might not work as expected, depends on the API change)
 $facebook = new FacebookAdapter(new Facebook);
 $facebook->myPost('some msg again');
+
+echo '<br>'. '<br>';
+
+echo 'Adapter (composition):' . '<br>'. '<br>';
+
+$desktop = new Desktop;
+$desktop->formatCss();
+$desktop->horizontalLayout();
+
+$mobileAdapter = new MobileAdapter(new Mobile);
+$mobileAdapter->formatCss();
+$mobileAdapter->horizontalLayout(); // thanks to adapter we can call this function, which then calls verticalLayout() instead
 
 echo '<hr>';
 #### END OF ADAPTER ####
