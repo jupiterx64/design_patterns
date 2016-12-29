@@ -279,3 +279,32 @@ $watermarkCreator->createWatermark('www.someurl.com', 'Copyrights by');
 
 echo '<hr>';
 #### END OF TEMPLATE
+
+#### STATE ####
+# eBook, OReilly Learning PHP Design Patterns, quote:
+# The Context instantiates instances of all states and sets the default state.
+# It has methods to trigger different states by calling the parallel methods in the concrete states.
+# Triggers are called to initiate a transition from the current state to a different state
+# A setter method keeps track of which state is the current one.
+#
+# To help keep track of the current state, Context has getters for each state when calls for changes in state occur.
+# Imagine a 3x3 matrix, and, if the current state is Cell 4, the system needs to know the available
+# transitions to other states. This is the job of the Context class.
+#
+# The most important role for the Context class is to keep track of the current state
+#
+# The Client makes all requests through the Context.
+# There is absolutely no direct connection between the Client and any of the state classes, including the IState interface.
+
+use DP\State\ExampleOne\Context;
+
+echo 'State (ExampleOne):' . '<br>'. '<br>';
+
+$context = new Context;
+$context->turnOnLight();
+$context->turnOnLight();
+$context->turnOffLight();
+$context->turnOffLight();
+
+echo '<hr>';
+#### END OF STATE ####
