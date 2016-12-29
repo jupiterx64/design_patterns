@@ -26,11 +26,11 @@ echo '<hr>';
 # Adapter adapts two incompatible interfaces!
 # Adapter adapts "two things"
 
-use DP\Adapter\SimpleOne\ExternalLibraries\Facebook;
-use DP\Adapter\SimpleOne\Adapters\FacebookAdapter;
-use DP\Adapter\CompositionAdapter\Desktop;
-use DP\Adapter\CompositionAdapter\Adapters\Mobile;
-use DP\Adapter\CompositionAdapter\Adapters\MobileAdapter;
+use DP\Structural\Adapter\SimpleOne\ExternalLibraries\Facebook;
+use DP\Structural\Adapter\SimpleOne\Adapters\FacebookAdapter;
+use DP\Structural\Adapter\CompositionAdapter\Desktop;
+use DP\Structural\Adapter\CompositionAdapter\Adapters\Mobile;
+use DP\Structural\Adapter\CompositionAdapter\Adapters\MobileAdapter;
 
 echo 'Adapter (simple):' . '<br>'. '<br>';
 
@@ -58,8 +58,8 @@ echo '<hr>';
 #### BUILDER ####
 # Builder hides complexity in creating objects!
 
-use DP\Basic\Models\Patient;
-use DP\Builder\Builders\PatientBuilder;
+use DP\Creational\Basic\Models\Patient;
+use DP\Creational\Builder\Builders\PatientBuilder;
 
 echo 'Builder:' . '<br>'. '<br>';
 
@@ -103,11 +103,11 @@ echo '<hr>';
 # Do not touch and the original class which is used all over the project!
 # Create a decorator instead, and use it in those special cases!
 
-use DP\Decorator\ExampleOne\Shapes\Circle;
-use DP\Decorator\ExampleOne\Shapes\Rectangle;
-use DP\Decorator\ExampleOne\Decorators\CircleWithCustomBorder;
-use DP\Decorator\ExampleTwo\RegularSector;
-use DP\Decorator\ExampleTwo\CustomSector1;
+use DP\Structural\Decorator\ExampleOne\Shapes\Circle;
+use DP\Structural\Decorator\ExampleOne\Shapes\Rectangle;
+use DP\Structural\Decorator\ExampleOne\Decorators\CircleWithCustomBorder;
+use DP\Structural\Decorator\ExampleTwo\RegularSector;
+use DP\Structural\Decorator\ExampleTwo\CustomSector1;
 
 echo 'Decorator (ExampleOne):' . '<br>'. '<br>';
 
@@ -141,9 +141,9 @@ echo '<hr>';
 # Facade hides complexity just about anything!
 # If something (some process) is a bit complicated, use facade to hide its complexity
 
-use DP\Facade\Auth\Login;
-use DP\Facade\Auth\Registration;
-use DP\Facade\Facades\Auth;
+use DP\Structural\Facade\Auth\Login;
+use DP\Structural\Facade\Auth\Registration;
+use DP\Structural\Facade\Facades\Auth;
 
 echo 'Facade:' . '<br>'. '<br>';
 
@@ -178,7 +178,7 @@ echo '<hr>';
 # Since this is PHP and it belongs to Web world, Database example is probably not the best example,
 # because new instances are quite often created, per request
 
-use DP\Singleton\DB;
+use DP\Creational\Singleton\DB;
 
 echo 'Singleton:' . '<br>'. '<br>';
 
@@ -208,11 +208,11 @@ echo '<hr>';
 # You call the baker (creator) who then makes the cupcakes (product) for you.
 # You are not involved with the creation of the object that you requested but you still get the cupcakes requested."
 
-use DP\FactoryMethod\Regular\Factory\BreadFactory;
-use DP\FactoryMethod\Regular\Factory\DonutFactory;
-use DP\FactoryMethod\ParameterizedFactory\Factory\BakerFactory;
-use DP\FactoryMethod\ParameterizedFactory\Products\Bread;
-use DP\FactoryMethod\ParameterizedFactory\Products\Donut;
+use DP\Creational\FactoryMethod\Regular\Factory\BreadFactory;
+use DP\Creational\FactoryMethod\Regular\Factory\DonutFactory;
+use DP\Creational\FactoryMethod\ParameterizedFactory\Factory\BakerFactory;
+use DP\Creational\FactoryMethod\ParameterizedFactory\Products\Bread;
+use DP\Creational\FactoryMethod\ParameterizedFactory\Products\Donut;
 
 echo 'Factory (regular):' . '<br>'. '<br>';
 
@@ -243,7 +243,7 @@ echo '<hr>';
 # and clone it once it's needed to create some "special cases"
 # Clones DO NOT call constructors, ever.
 
-use DP\Prototype\ConcretePrototype1;
+use DP\Creational\Prototype\ConcretePrototype1;
 
 echo 'Prototype:' . '<br>'. '<br>';
 
@@ -270,7 +270,7 @@ echo '<hr>';
 #  Parent (abstract class) establishes the operations and sets their order, and the child class implements the operations.
 #  “Don’t call us; we’ll call you”
 
-use DP\Template\SpecificImplWatermark;
+use DP\Behavioral\Template\SpecificImplWatermark;
 
 echo 'Template:' . '<br>'. '<br>';
 
@@ -296,8 +296,8 @@ echo '<hr>';
 # The Client makes all requests through the Context.
 # There is absolutely no direct connection between the Client and any of the state classes, including the IState interface.
 
-use DP\State\ExampleOne\Context as ContextOne;
-use DP\State\ExampleTwo\Context as ContextTwo;
+use DP\Behavioral\State\ExampleOne\Context as ContextOne;
+use DP\Behavioral\State\ExampleTwo\Context as ContextTwo;
 
 echo 'State (ExampleOne):' . '<br>'. '<br>';
 
@@ -340,11 +340,11 @@ echo '<hr>';
 # • It maintains a reference to a Strategy object.
 # • It may define an interface that lets the Strategy access its data.
 
-use DP\Strategy\Context;
-use DP\Strategy\Strategies\Insert;
-use DP\Strategy\Strategies\Update;
-use DP\Strategy\Strategies\Delete;
-use DP\Strategy\Strategies\Get;
+use DP\Behavioral\Strategy\Context;
+use DP\Behavioral\Strategy\Strategies\Insert;
+use DP\Behavioral\Strategy\Strategies\Update;
+use DP\Behavioral\Strategy\Strategies\Delete;
+use DP\Behavioral\Strategy\Strategies\Get;
 
 echo 'Strategy:' . '<br>'. '<br>';
 
