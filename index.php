@@ -324,3 +324,44 @@ $contextTwo->turnOffLight();
 
 echo '<hr>';
 #### END OF STATE ####
+
+### STRATEGY ####
+# eBook, OReilly Learning PHP Design Patterns, quote:
+# Each of the concrete strategies is encapsulated so that any changes will not crash the system.
+#
+# The Client class makes requests through the Context, creating a concrete strategy.
+# The request for the different strategies is accomplished with a set of methods.
+# The following two lines are key in the request:
+# $context=new Context(new ConcreteStrategy());
+# $context->algorithm();
+#
+# The Gang of Four specify the following characteristics:
+# • It is configured with a concrete strategy object.
+# • It maintains a reference to a Strategy object.
+# • It may define an interface that lets the Strategy access its data.
+
+use DP\Strategy\Context;
+use DP\Strategy\Strategies\Insert;
+use DP\Strategy\Strategies\Update;
+use DP\Strategy\Strategies\Delete;
+use DP\Strategy\Strategies\Get;
+
+echo 'Strategy:' . '<br>'. '<br>';
+
+$context = new Context(new Insert);
+$context->apply();
+
+$context = new Context(new Update);
+$context->apply();
+
+$context = new Context;
+$context->setStrategy(new Delete);
+$context->apply();
+
+$contextWithoutStrategy = new Context;
+$contextWithoutStrategy->apply();
+$contextWithoutStrategy->setStrategy(new Get);
+$contextWithoutStrategy->apply();
+
+echo '<hr>';
+### END OF STRATEGY ####
