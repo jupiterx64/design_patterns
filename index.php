@@ -103,11 +103,13 @@ echo '<hr>';
 # Do not touch and the original class which is used all over the project!
 # Create a decorator instead, and use it in those special cases!
 
-use DP\Decorator\Shapes\Circle;
-use DP\Decorator\Shapes\Rectangle;
-use DP\Decorator\Decorators\CircleWithCustomBorder;
+use DP\Decorator\ExampleOne\Shapes\Circle;
+use DP\Decorator\ExampleOne\Shapes\Rectangle;
+use DP\Decorator\ExampleOne\Decorators\CircleWithCustomBorder;
+use DP\Decorator\ExampleTwo\RegularSector;
+use DP\Decorator\ExampleTwo\CustomSector1;
 
-echo 'Decorator:' . '<br>'. '<br>';
+echo 'Decorator (ExampleOne):' . '<br>'. '<br>';
 
 $normal_circle = new Circle;
 $normal_circle->draw();
@@ -121,6 +123,16 @@ echo '<br>';
 
 $special_version_of_circle = new CircleWithCustomBorder(new Circle);
 $special_version_of_circle->draw();
+
+echo '<br>' . '<br>';
+
+echo 'Decorator (ExampleTwo):' . '<br>'. '<br>';
+
+$regularSector = new RegularSector;
+echo 'Sector: ' . $regularSector->getSector() . ' Name: ' . $regularSector->getName() . '<br>';
+
+$customSector = new CustomSector1(new RegularSector);
+echo 'Sector: ' . $customSector->getSector() . ' Name: ' . $customSector->getName() . '<br>';
 
 echo '<hr>';
 #### END OF DECORATOR ####

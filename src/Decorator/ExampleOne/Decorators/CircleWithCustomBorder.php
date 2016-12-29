@@ -1,8 +1,8 @@
 <?php
 
-namespace DP\Decorator\Decorators;
+namespace DP\Decorator\ExampleOne\Decorators;
 
-use DP\Decorator\Shapes\Circle;
+use DP\Decorator\ExampleOne\Shapes\Circle;
 
 // The special version of object/class Circle
 class CircleWithCustomBorder

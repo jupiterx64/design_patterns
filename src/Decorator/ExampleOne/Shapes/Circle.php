@@ -1,6 +1,6 @@
 <?php
 
-namespace DP\Decorator\Shapes;
+namespace DP\Decorator\ExampleOne\Shapes;
 
 // Do not make BIG changes in this class!
 // If you need something special sometimes, create a decorator for it!
