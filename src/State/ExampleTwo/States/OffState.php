@@ -1,8 +1,8 @@
 <?php
 
-namespace DP\State\ExampleOne\States;
+namespace DP\State\ExampleTwo\States;
 
-use DP\State\ExampleOne\Context;
+use DP\State\ExampleTwo\Context;
 
 class OffState implements IState
 {
@@ -12,16 +12,20 @@ class OffState implements IState
         $this->context = $context;
     }
 
-    // Because we are in OffState, we can go to OffState instance
-    // And since Context is main worker class, we need to set this new state for the context
     public function turnLightOn() {
-        echo 'Light on!' . '<br>';
+        echo 'Off went to on!' . '<br>';
         $this->context->setState($this->context->getOnState());
     }
 
-
-    // We are already in OffState! Thats why we cant turn light off again
     public function turnLightOff() {
         echo 'Light already off!' . '<br>';
+    }
+
+    public function turnBrighter() {
+        echo 'Off cant go to brighter!' . '<br>';
+    }
+
+    public function turnBrightest() {
+        echo 'Off cant go to brightest!' . '<br>';
     }
 }

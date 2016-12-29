@@ -296,15 +296,31 @@ echo '<hr>';
 # The Client makes all requests through the Context.
 # There is absolutely no direct connection between the Client and any of the state classes, including the IState interface.
 
-use DP\State\ExampleOne\Context;
+use DP\State\ExampleOne\Context as ContextOne;
+use DP\State\ExampleTwo\Context as ContextTwo;
 
 echo 'State (ExampleOne):' . '<br>'. '<br>';
 
-$context = new Context;
-$context->turnOnLight();
-$context->turnOnLight();
-$context->turnOffLight();
-$context->turnOffLight();
+$contextOne = new ContextOne;
+$contextOne->turnOnLight();
+$contextOne->turnOnLight();
+$contextOne->turnOffLight();
+$contextOne->turnOffLight();
+
+echo '<br>'. '<br>';
+
+echo 'State (ExampleTwo, more states):' . '<br>'. '<br>';
+
+$contextTwo = new contextTwo;
+$contextTwo->turnOnLight();
+$contextTwo->turnOnLight();
+$contextTwo->turnOffLight();
+$contextTwo->turnBrightest();
+$contextTwo->turnBrighter();
+$contextTwo->turnOnLight();
+$contextTwo->turnOffLight();
+$contextTwo->turnBrightest();
+$contextTwo->turnOffLight();
 
 echo '<hr>';
 #### END OF STATE ####

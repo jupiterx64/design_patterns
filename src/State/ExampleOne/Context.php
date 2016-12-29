@@ -20,6 +20,11 @@ class Context
         $this->currentState = $this->offState;
     }
 
+    // Set the current state (class instance)
+    public function setState(IState $state) {
+        $this->currentState = $state;
+    }
+
     // Method--Trigger
     // Call THE state method from whatever the current state is on
     public function turnOnLight() {
@@ -28,11 +33,6 @@ class Context
 
     public function turnOffLight() {
         $this->currentState->turnLightOff();
-    }
-
-    // Set the current state (class instance)
-    public function setState(IState $state) {
-        $this->currentState = $state;
     }
 
     // Getters for all available states (class instances)

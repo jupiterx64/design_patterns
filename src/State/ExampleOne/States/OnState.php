@@ -14,13 +14,13 @@ class OnState implements IState
 
     // We are already in OnState! Thats why we cant turn light on again
     public function turnLightOn() {
-        echo 'Lights already on!' . '<br>';
+        echo 'Light already on!' . '<br>';
     }
 
     // Because we are in OnState, we can go to OffState instance
     // And since Context is main worker class, we need to set new state for the context
     public function turnLightOff() {
-        echo 'Lights off!' . '<br>';
+        echo 'Light off!' . '<br>';
         $this->context->setState($this->context->getOffState());
     }
 }
