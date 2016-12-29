@@ -257,3 +257,25 @@ $copy->displayName();
 
 echo '<hr>';
 #### END OF PROTOTYPE
+
+#### TEMPLATE ####
+# eBook, OReilly Learning PHP Design Patterns, quote:
+# "Perhaps a better way of thinking about the Hollywood Principle is in terms of teacherstudent relations in a
+# kindergarten class—the Kindergarten Principle. The teacher sets up a number of projects for the kids to
+# carry out in a certain order—counting, telling time, vocabulary. The teacher sets the order,
+# but the way it is actually carried out, or implemented by the kids depends on the kids.
+#  However, the kids cannot change the order set up by the teacher.
+#  In other words, a kid cannot say in the middle of a counting exercise, “I want to do vocabulary now.” "
+#
+#  Parent (abstract class) establishes the operations and sets their order, and the child class implements the operations.
+#  “Don’t call us; we’ll call you”
+
+use DP\Template\SpecificImplWatermark;
+
+echo 'Template:' . '<br>'. '<br>';
+
+$watermarkCreator = new SpecificImplWatermark;
+$watermarkCreator->createWatermark('www.someurl.com', 'Copyrights by');
+
+echo '<hr>';
+#### END OF TEMPLATE
