@@ -7,9 +7,11 @@ use DP\Behavioral\Observer\Subject;
 
 class CustomerA implements IObserver
 {
+    private $Id;
     private $price;
 
     public function __construct() {
+        $this->Id = 1;
         $this->price = 15.99;
     }
 
@@ -19,5 +21,9 @@ class CustomerA implements IObserver
 
     public function getPrice() {
         return $this->price;
+    }
+
+    public function getId() {
+        return $this->Id;
     }
 }

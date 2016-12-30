@@ -414,7 +414,7 @@ $companyA = new CompanyA;
 $customerA = new CustomerA;
 $customerB = new CustomerB;
 
-// assign customers to company
+// assign customers to company, or those who needs to receive newest update!
 $companyA->attach($customerA);
 $companyA->attach($customerB);
 
@@ -422,6 +422,8 @@ echo 'CustomerA current price ' . $customerA->getPrice() . '<br>';
 echo 'CustomerB current price ' . $customerB->getPrice() . '<br>';
 
 // company changes price, and it automatically changes for all observers/subscribers/listeners
+// but we will detach $customerB so it doesnt get these changes
+$companyA->detach($customerB);
 $companyA->setPrice(2);
 echo 'CustomerA price after change ' . $customerA->getPrice() . '<br>';
 echo 'CustomerB price after change ' . $customerB->getPrice() . '<br>';

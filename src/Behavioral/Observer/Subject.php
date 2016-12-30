@@ -16,12 +16,13 @@ abstract class Subject
     public function detach(IObserver $observer) {
         $position = 0;
 
-        foreach ($this->observers as $ob) {
-            ++$position;
+        foreach ($this->observers as &$ob) {
 
-            if ($ob == $observer) {
+            if ($ob->getId() == $observer->getId()) {
                 array_splice($this->observers, $position, 1);
             }
+
+            $position++;
         }
     }
 
