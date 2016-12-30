@@ -10,7 +10,7 @@ class H1 extends Handler
         $this->request = 'H1';
     }
 
-    public function nextHandler($handler) {
+    public function nextHandler(Handler $handler) {
         $this->handler = $handler;
     }
 

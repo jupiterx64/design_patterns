@@ -372,7 +372,7 @@ echo '<hr>';
 # If the $handle variable (concrete handler pre-defined) matches the $request passed from the Client (via the Request helper),
 # the query is handled by the concrete handler. Otherwise, it passes the request to the successor in the chain.
 #
-# When one object/process can be handled by many handlers, but each time it's a different handler
+# When one object/process can be handled by many handlers, but each time it's a different handler but you are not sure which one
 # Request A might and should be handled by Handler A, but request C should be handled by Handler C or D...
 # Like a chained big switch...case statement
 
@@ -396,3 +396,35 @@ $h1->handle($loaded);
 
 echo '<hr>';
 #### END OF CHAIN OF RESPONSIBILITY ####
+
+#### OBSERVER ####
+# Observers are those who need to get notified about changes!
+# Subjects are those who make changes!
+# Whenever subject (owner) makes a change, inform all of its observers (listeners, subscribers)
+
+use DP\Behavioral\Observer\Subjects\CompanyA;
+use DP\Behavioral\Observer\Observers\CustomerA;
+use DP\Behavioral\Observer\Observers\CustomerB;
+
+echo 'Observer:' . '<br>'. '<br>';
+
+// create a company so we can assign customers to it
+$companyA = new CompanyA;
+// create customers
+$customerA = new CustomerA;
+$customerB = new CustomerB;
+
+// assign customers to company
+$companyA->attach($customerA);
+$companyA->attach($customerB);
+
+echo 'CustomerA current price ' . $customerA->getPrice() . '<br>';
+echo 'CustomerB current price ' . $customerB->getPrice() . '<br>';
+
+// company changes price, and it automatically changes for all observers/subscribers/listeners
+$companyA->setPrice(2);
+echo 'CustomerA price after change ' . $customerA->getPrice() . '<br>';
+echo 'CustomerB price after change ' . $customerB->getPrice() . '<br>';
+
+echo '<hr>';
+#### END OF OBSERVER ####
