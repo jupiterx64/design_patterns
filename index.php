@@ -365,3 +365,34 @@ $contextWithoutStrategy->apply();
 
 echo '<hr>';
 ### END OF STRATEGY ####
+
+#### CHAIN OF RESPONSIBILITY ####
+# eBook, OReilly Learning PHP Design Patterns, quote:
+# The Request class provides an object that can be passed along the chain with a method for retrieving the request.
+# If the $handle variable (concrete handler pre-defined) matches the $request passed from the Client (via the Request helper),
+# the query is handled by the concrete handler. Otherwise, it passes the request to the successor in the chain.
+#
+# When one object/process can be handled by many handlers, but each time it's a different handler
+# Request A might and should be handled by Handler A, but request C should be handled by Handler C or D...
+# Like a chained big switch...case statement
+
+use DP\Behavioral\ChainOfResponsibility\Request;
+use DP\Behavioral\ChainOfResponsibility\Handlers\H1;
+use DP\Behavioral\ChainOfResponsibility\Handlers\H2;
+use DP\Behavioral\ChainOfResponsibility\Handlers\H3;
+
+echo 'Chain of responsibility:' . '<br>'. '<br>';
+
+$clientInput = 'H2';
+$h1 = new H1;
+$h2 = new H2;
+$h3 = new H3;
+
+$h1->nextHandler($h2);
+$h2->nextHandler($h3);
+
+$loaded = new Request($clientInput);
+$h1->handle($loaded);
+
+echo '<hr>';
+#### END OF CHAIN OF RESPONSIBILITY ####
