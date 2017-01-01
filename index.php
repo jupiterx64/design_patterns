@@ -22,39 +22,6 @@ $driver->drive();
 echo '<hr>';
 #### END OF BASICS ####
 
-#### ADAPTER ####
-# Adapter adapts two incompatible interfaces!
-# Adapter adapts "two things"
-
-use DP\Structural\Adapter\SimpleOne\ExternalLibraries\Facebook;
-use DP\Structural\Adapter\SimpleOne\Adapters\FacebookAdapter;
-use DP\Structural\Adapter\CompositionAdapter\Desktop;
-use DP\Structural\Adapter\CompositionAdapter\Adapters\Mobile;
-use DP\Structural\Adapter\CompositionAdapter\Adapters\MobileAdapter;
-
-echo 'Adapter (simple):' . '<br>'. '<br>';
-
-// Once facebook changes something, so it becomes no longer compatible to our application
-// we need to adapt these changes in FacebookAdapter class
-// Caution! Adapter with API changes should be used with caution! (it might not work as expected, depends on the API change)
-$facebook = new FacebookAdapter(new Facebook);
-$facebook->myPost('some msg again');
-
-echo '<br>'. '<br>';
-
-echo 'Adapter (composition):' . '<br>'. '<br>';
-
-$desktop = new Desktop;
-$desktop->formatCss();
-$desktop->horizontalLayout();
-
-$mobileAdapter = new MobileAdapter(new Mobile);
-$mobileAdapter->formatCss();
-$mobileAdapter->horizontalLayout(); // thanks to adapter we can call this function, which then calls verticalLayout() instead
-
-echo '<hr>';
-#### END OF ADAPTER ####
-
 #### BUILDER ####
 # Builder hides complexity in creating objects!
 
@@ -202,6 +169,39 @@ DB::instance()->query("select * from messages");
 echo '<hr>';
 #### END OF SINGLETON ####
 
+#### ADAPTER ####
+# Adapter adapts two incompatible interfaces!
+# Adapter adapts "two things"
+
+use DP\Structural\Adapter\SimpleOne\ExternalLibraries\Facebook;
+use DP\Structural\Adapter\SimpleOne\Adapters\FacebookAdapter;
+use DP\Structural\Adapter\CompositionAdapter\Desktop;
+use DP\Structural\Adapter\CompositionAdapter\Adapters\Mobile;
+use DP\Structural\Adapter\CompositionAdapter\Adapters\MobileAdapter;
+
+echo 'Adapter (simple):' . '<br>'. '<br>';
+
+// Once facebook changes something, so it becomes no longer compatible to our application
+// we need to adapt these changes in FacebookAdapter class
+// Caution! Adapter with API changes should be used with caution! (it might not work as expected, depends on the API change)
+$facebook = new FacebookAdapter(new Facebook);
+$facebook->myPost('some msg again');
+
+echo '<br>'. '<br>';
+
+echo 'Adapter (composition):' . '<br>'. '<br>';
+
+$desktop = new Desktop;
+$desktop->formatCss();
+$desktop->horizontalLayout();
+
+$mobileAdapter = new MobileAdapter(new Mobile);
+$mobileAdapter->formatCss();
+$mobileAdapter->horizontalLayout(); // thanks to adapter we can call this function, which then calls verticalLayout() instead
+
+echo '<hr>';
+#### END OF ADAPTER ####
+
 #### FACTORY METHDO ####
 # eBook, OReilly Learning PHP Design Patterns, quote:
 # "Imagine that you want to order chocolate cupcakes with black and orange frosting for a Halloween party.
@@ -214,7 +214,7 @@ use DP\Creational\FactoryMethod\ParameterizedFactory\Factory\BakerFactory;
 use DP\Creational\FactoryMethod\ParameterizedFactory\Products\Bread;
 use DP\Creational\FactoryMethod\ParameterizedFactory\Products\Donut;
 
-echo 'Factory (regular):' . '<br>'. '<br>';
+echo 'Factory method:' . '<br>'. '<br>';
 
 $breadFactory = new BreadFactory();
 $breadFactory->bake();
@@ -280,6 +280,78 @@ $watermarkCreator->createWatermark('www.someurl.com', 'Copyrights by');
 echo '<hr>';
 #### END OF TEMPLATE
 
+#### CHAIN OF RESPONSIBILITY ####
+# eBook, OReilly Learning PHP Design Patterns, quote:
+# The Request class provides an object that can be passed along the chain with a method for retrieving the request.
+# If the $handle variable (concrete handler pre-defined) matches the $request passed from the Client (via the Request helper),
+# the query is handled by the concrete handler. Otherwise, it passes the request to the successor in the chain.
+#
+# When one object/process can be handled by many handlers, but each time it's a different handler but you are not sure which one
+# Request A might and should be handled by Handler A, but request C should be handled by Handler C or D...
+# Like a chained big switch...case statement
+
+use DP\Behavioral\ChainOfResponsibility\Request;
+use DP\Behavioral\ChainOfResponsibility\Handlers\H1;
+use DP\Behavioral\ChainOfResponsibility\Handlers\H2;
+use DP\Behavioral\ChainOfResponsibility\Handlers\H3;
+
+echo 'Chain of responsibility:' . '<br>'. '<br>';
+
+$clientInput = 'H2';
+$h1 = new H1;
+$h2 = new H2;
+$h3 = new H3;
+
+$h1->nextHandler($h2);
+$h2->nextHandler($h3);
+
+$loaded = new Request($clientInput);
+$h1->handle($loaded);
+
+echo '<hr>';
+#### END OF CHAIN OF RESPONSIBILITY ####
+
+### STRATEGY ####
+# eBook, OReilly Learning PHP Design Patterns, quote:
+# Each of the concrete strategies is encapsulated so that any changes will not crash the system.
+#
+# The Client class makes requests through the Context, creating a concrete strategy.
+# The request for the different strategies is accomplished with a set of methods.
+# The following two lines are key in the request:
+# $context=new Context(new ConcreteStrategy());
+# $context->algorithm();
+#
+# The Gang of Four specify the following characteristics:
+# • It is configured with a concrete strategy object.
+# • It maintains a reference to a Strategy object.
+# • It may define an interface that lets the Strategy access its data.
+
+use DP\Behavioral\Strategy\Context;
+use DP\Behavioral\Strategy\Strategies\Insert;
+use DP\Behavioral\Strategy\Strategies\Update;
+use DP\Behavioral\Strategy\Strategies\Delete;
+use DP\Behavioral\Strategy\Strategies\Get;
+
+echo 'Strategy:' . '<br>'. '<br>';
+
+$context = new Context(new Insert);
+$context->apply();
+
+$context = new Context(new Update);
+$context->apply();
+
+$context = new Context;
+$context->setStrategy(new Delete);
+$context->apply();
+
+$contextWithoutStrategy = new Context;
+$contextWithoutStrategy->apply();
+$contextWithoutStrategy->setStrategy(new Get);
+$contextWithoutStrategy->apply();
+
+echo '<hr>';
+### END OF STRATEGY ####
+
 #### STATE ####
 # eBook, OReilly Learning PHP Design Patterns, quote:
 # The Context instantiates instances of all states and sets the default state.
@@ -325,82 +397,15 @@ $contextTwo->turnOffLight();
 echo '<hr>';
 #### END OF STATE ####
 
-### STRATEGY ####
-# eBook, OReilly Learning PHP Design Patterns, quote:
-# Each of the concrete strategies is encapsulated so that any changes will not crash the system.
-#
-# The Client class makes requests through the Context, creating a concrete strategy.
-# The request for the different strategies is accomplished with a set of methods.
-# The following two lines are key in the request:
-# $context=new Context(new ConcreteStrategy());
-# $context->algorithm();
-#
-# The Gang of Four specify the following characteristics:
-# • It is configured with a concrete strategy object.
-# • It maintains a reference to a Strategy object.
-# • It may define an interface that lets the Strategy access its data.
-
-use DP\Behavioral\Strategy\Context;
-use DP\Behavioral\Strategy\Strategies\Insert;
-use DP\Behavioral\Strategy\Strategies\Update;
-use DP\Behavioral\Strategy\Strategies\Delete;
-use DP\Behavioral\Strategy\Strategies\Get;
-
-echo 'Strategy:' . '<br>'. '<br>';
-
-$context = new Context(new Insert);
-$context->apply();
-
-$context = new Context(new Update);
-$context->apply();
-
-$context = new Context;
-$context->setStrategy(new Delete);
-$context->apply();
-
-$contextWithoutStrategy = new Context;
-$contextWithoutStrategy->apply();
-$contextWithoutStrategy->setStrategy(new Get);
-$contextWithoutStrategy->apply();
-
-echo '<hr>';
-### END OF STRATEGY ####
-
-#### CHAIN OF RESPONSIBILITY ####
-# eBook, OReilly Learning PHP Design Patterns, quote:
-# The Request class provides an object that can be passed along the chain with a method for retrieving the request.
-# If the $handle variable (concrete handler pre-defined) matches the $request passed from the Client (via the Request helper),
-# the query is handled by the concrete handler. Otherwise, it passes the request to the successor in the chain.
-#
-# When one object/process can be handled by many handlers, but each time it's a different handler but you are not sure which one
-# Request A might and should be handled by Handler A, but request C should be handled by Handler C or D...
-# Like a chained big switch...case statement
-
-use DP\Behavioral\ChainOfResponsibility\Request;
-use DP\Behavioral\ChainOfResponsibility\Handlers\H1;
-use DP\Behavioral\ChainOfResponsibility\Handlers\H2;
-use DP\Behavioral\ChainOfResponsibility\Handlers\H3;
-
-echo 'Chain of responsibility:' . '<br>'. '<br>';
-
-$clientInput = 'H2';
-$h1 = new H1;
-$h2 = new H2;
-$h3 = new H3;
-
-$h1->nextHandler($h2);
-$h2->nextHandler($h3);
-
-$loaded = new Request($clientInput);
-$h1->handle($loaded);
-
-echo '<hr>';
-#### END OF CHAIN OF RESPONSIBILITY ####
-
 #### OBSERVER ####
 # Observers are those who need to get notified about changes!
 # Subjects are those who make changes!
 # Whenever subject (owner) makes a change, inform all of its observers (listeners, subscribers)
+#
+# Defines a one-to-many dependency between objects so that when one object changes state, 
+# all its dependents are notified and updated automatically.
+#
+# One class (Subject), do changes to all other classes (observers), one-to-many
 
 use DP\Behavioral\Observer\Subjects\CompanyA;
 use DP\Behavioral\Observer\Observers\CustomerA;
@@ -430,3 +435,34 @@ echo 'CustomerB price after change ' . $customerB->getPrice() . '<br>';
 
 echo '<hr>';
 #### END OF OBSERVER ####
+
+#### MEDIATOR ####
+# Define an object that encapsulates how a set of objects interact. 
+# Mediator promotes loose coupling by keeping objects from referring to each other explicitly, 
+# and it lets you vary their interaction independently.
+#
+# Like a hub, many classes/objects communicate between each other through this hub (or many hubs)
+# Chatroom could be an example
+# Person A sends message to Person B through chatroom, so the chatroom decides which object will call receive() function
+
+use DP\Behavioral\Mediator\ExampleOne\Chatroom;
+use DP\Behavioral\Mediator\ExampleOne\Participant;
+
+echo 'Mediator:' . '<br>'. '<br>';
+
+$chatroom = new Chatroom;
+
+$john = new Participant('john');
+$paul = new Participant('paul');
+$mike = new Participant('mike');
+
+$chatroom->register($john);
+$chatroom->register($paul);
+$chatroom->register($mike);
+
+$john->send('paul', 'Hello paul, john here.');
+$john->send('mike', 'Hello mike, john here.');
+$mike->send('john', 'Hello john, mike here.');
+
+echo '<hr>';
+#### END OF MEDIATOR ####
