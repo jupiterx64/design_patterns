@@ -2,6 +2,7 @@
 
 namespace DP\Behavioral\State\ExampleTwo\States;
 
+// options the user can use
 interface IState
 {
     // can go to BRIGHTER only
