@@ -474,16 +474,17 @@ echo '<hr>';
 #
 # Create specific command (TurnLighOnCommand) which is going to be called on a given object/receiver (Light, Room, Garage...),
 # so each command needs an instance (receiver) which holds the logic for the given command.
-# Create receiver which holds the logic for a specific command
+# Create receiver which holds the logic (in functions) for a specific command
 # Create invoker which is going to set specific command and call it (RemoteController or LightSwitcher), the executing/worker class
 #
 # Commands: LightOnCommand, OpenGarageDoorCommand...
 # Receivers: Room, Garage
 # Invoker: RemoteController
 # It ends up like: Turn the LIGHT ON in the ROOM with REMOTE_CONTROLLER
+# So the invoker will call specific functions from receivers through command
 #
-# Receivers can execute different Commands (these are different functions)
-# Commands hold logic to be executed on receivers (these are different classes that hold logic)
+# Receivers can execute different Commands (these are different functions that correspond to different classes/commands)
+# Commands will call receivers' functions that correspond to the command
 # Invoker runs it all (set command for a receiver and execute it)
 
 use DP\Behavioral\Command\ExampleOne\RemoteController;
