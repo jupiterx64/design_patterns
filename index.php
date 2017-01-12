@@ -402,7 +402,7 @@ echo '<hr>';
 # Subjects are those who make changes!
 # Whenever subject (owner) makes a change, inform all of its observers (listeners, subscribers)
 #
-# Defines a one-to-many dependency between objects so that when one object changes state, 
+# Defines a one-to-many dependency between objects so that when one object changes state,
 # all its dependents are notified and updated automatically.
 #
 # One class (Subject), do changes to all other classes (observers), one-to-many
@@ -437,8 +437,8 @@ echo '<hr>';
 #### END OF OBSERVER ####
 
 #### MEDIATOR ####
-# Define an object that encapsulates how a set of objects interact. 
-# Mediator promotes loose coupling by keeping objects from referring to each other explicitly, 
+# Define an object that encapsulates how a set of objects interact.
+# Mediator promotes loose coupling by keeping objects from referring to each other explicitly,
 # and it lets you vary their interaction independently.
 #
 # Like a hub, many classes/objects communicate between each other through this hub (or many hubs)
@@ -466,3 +466,42 @@ $mike->send('john', 'Hello john, mike here.');
 
 echo '<hr>';
 #### END OF MEDIATOR ####
+
+#### COMMAND ####
+# eBook, Head First Design Patterns, source.
+# OO design pattern that allows us to separate an object making a request
+# from the objects that receive and execute those requests.
+#
+# Create specific command (TurnLighOnCommand) which is going to be called on a given object/receiver (Light, Room, Garage...),
+# so each command needs an instance (receiver) which holds the logic for the given command.
+# Create receiver which holds the logic for a specific command
+# Create invoker which is going to set specific command and call it (RemoteController or LightSwitcher), the executing/worker class
+#
+# Commands: LightOnCommand, OpenGarageDoorCommand...
+# Receivers: Room, Garage
+# Invoker: RemoteController
+# It ends up like: Turn the LIGHT ON in the ROOM with REMOTE_CONTROLLER
+#
+# Receivers can execute different Commands (these are different functions)
+# Commands hold logic to be executed on receivers (these are different classes that hold logic)
+# Invoker runs it all (set command for a receiver and execute it)
+
+use DP\Behavioral\Command\ExampleOne\RemoteController;
+use DP\Behavioral\Command\ExampleOne\Room;
+use DP\Behavioral\Command\ExampleOne\LightOnCommand;
+
+echo 'Command:' . '<br>'. '<br>';
+
+// invoker to execute specific commands on a given receiver
+$remoteController = new RemoteController;
+// receiver, which is binded to the command at some point
+$room = new Room;
+// command, binded receiver to the command
+$lightOnCommand = new LightOnCommand($room);
+
+// set command to execute
+$remoteController->setCommand($lightOnCommand);
+$remoteController->executeCommand();
+
+echo '<hr>';
+#### END OF COMMAND ####
