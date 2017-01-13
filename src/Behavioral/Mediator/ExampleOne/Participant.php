@@ -2,7 +2,7 @@
 
 namespace DP\Behavioral\Mediator\ExampleOne;
 
-class Participant
+class Participant implements IParticipant
 {
     private $name;
     private $chatroom;
@@ -11,7 +11,7 @@ class Participant
         $this->name = $name;
     }
 
-    public function setChatroom(Chatroom $chatroom) {
+    public function setChatroom(IChatroom $chatroom) {
         $this->chatroom = $chatroom;
     }
 
