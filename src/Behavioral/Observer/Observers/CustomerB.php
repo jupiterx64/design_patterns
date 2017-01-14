@@ -17,6 +17,8 @@ class CustomerB implements IObserver
 
     public function update(Subject $subject) {
         $this->price = $subject->getPrice();
+        // or we can automatically attach this observer to subject
+        // $subject->attach($this);
     }
 
     public function getPrice() {
