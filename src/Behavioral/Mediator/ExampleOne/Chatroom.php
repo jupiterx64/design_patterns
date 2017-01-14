@@ -2,7 +2,7 @@
 
 namespace DP\Behavioral\Mediator\ExampleOne;
 
-class Chatroom
+class Chatroom implements IChatroom
 {
     private $participants = [];
 

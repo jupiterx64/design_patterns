@@ -8,4 +8,8 @@ class Room
     public function turnLightOn() {
         echo 'Turned LIGHT ON (command) in ROOM (receiver).' . '<br>';
     }
+
+    public function turnLightOff() {
+        echo 'Turned LIGHT OFF (command) in ROOM (receiver).' . '<br>';
+    }
 }

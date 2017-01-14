@@ -482,25 +482,70 @@ echo '<hr>';
 # Invoker: RemoteController
 # It ends up like: Turn the LIGHT ON in the ROOM with REMOTE_CONTROLLER
 # So the invoker will call specific functions from receivers through command
+# In other words, use class (LightOnCommand::execute()) to execute function from another class (Room::something())
 #
 # Receivers can execute different Commands (these are different functions that correspond to different classes/commands)
 # Commands will call receivers' functions that correspond to the command
 # Invoker runs it all (set command for a receiver and execute it)
+#
+# Quoting, yshavit from stackoverflow:
+# "The general pattern here is that you've got one piece of the code responsible for
+# figuring out that some action needs to be taken without knowing what that action is,
+# and another piece of the code knows how to do an action but not when to do it."
+#
+# Quoting, holroy from stackoverflow:
+# "In most programming, you'll want to hide away implementation so that when looking at the top-most problem,
+# it consists of a comprehensible subset of commands/code.
+# I.e. You don't need/want to know the gory details of how a light is switched on, or a car is started.
+# If your focus is to get the car started, you don't need to understand how the engine works,
+# and how it needs fuel to enter the engine, how the valves work, ..."
+#
+# http://stackoverflow.com/questions/32597736/why-should-i-use-the-command-design-pattern-while-i-can-easily-call-required-met#32606086
 
 use DP\Behavioral\Command\ExampleOne\RemoteController;
 use DP\Behavioral\Command\ExampleOne\Room;
 use DP\Behavioral\Command\ExampleOne\LightOnCommand;
+use DP\Behavioral\Command\ExampleOne\LightOffCommand;
+use DP\Behavioral\Command\ExampleTwo\RemoteController as RCTwo;
+use DP\Behavioral\Command\ExampleTwo\Room as RTwo;
+use DP\Behavioral\Command\ExampleTwo\LightOnCommand as LOnTwo;
+use DP\Behavioral\Command\ExampleTwo\LightOffCommand as LOffTwo;
 
-echo 'Command:' . '<br>'. '<br>';
+echo 'Command (ExampleOne):' . '<br>'. '<br>';
 
 // invoker to execute specific commands on a given receiver
 $remoteController = new RemoteController;
 // receiver, which is binded to the command at some point
 $room = new Room;
-// command, binded receiver to the command
+// commands, bind receiver and commands
 $lightOnCommand = new LightOnCommand($room);
+$lightOffCommand = new LightOffCommand($room);
 
 // set command to execute
+$remoteController->setCommand($lightOnCommand);
+$remoteController->executeCommand();
+$remoteController->setCommand($lightOffCommand);
+$remoteController->executeCommand();
+$remoteController->setCommand($lightOnCommand);
+$remoteController->executeCommand();
+
+echo '<br>'. '<br>' . 'Command (ExampleTwo):' . '<br>'. '<br>';
+
+// invoker to execute specific commands on a given receiver
+$remoteController = new RCTwo;
+// receiver, which is binded to the command at some point
+$room = new RTwo;
+// commands, bind receiver and commands
+$lightOnCommand = new LOnTwo($room);
+$lightOffCommand = new LOffTwo($room);
+
+// set command to execute
+$remoteController->setCommand($lightOnCommand);
+$remoteController->executeCommand();
+$remoteController->undoCommand();
+$remoteController->setCommand($lightOffCommand);
+$remoteController->executeCommand();
+$remoteController->undoCommand();
 $remoteController->setCommand($lightOnCommand);
 $remoteController->executeCommand();
 
