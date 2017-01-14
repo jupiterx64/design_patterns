@@ -4,7 +4,7 @@ namespace DP\Behavioral\Command\ExampleOne;
 
 class RemoteController
 {
-    private $command;
+    private $command;    
 
     public function setCommand(ICommand $command) {
         $this->command = $command;

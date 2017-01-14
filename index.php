@@ -505,17 +505,47 @@ echo '<hr>';
 use DP\Behavioral\Command\ExampleOne\RemoteController;
 use DP\Behavioral\Command\ExampleOne\Room;
 use DP\Behavioral\Command\ExampleOne\LightOnCommand;
+use DP\Behavioral\Command\ExampleOne\LightOffCommand;
+use DP\Behavioral\Command\ExampleTwo\RemoteController as RCTwo;
+use DP\Behavioral\Command\ExampleTwo\Room as RTwo;
+use DP\Behavioral\Command\ExampleTwo\LightOnCommand as LOnTwo;
+use DP\Behavioral\Command\ExampleTwo\LightOffCommand as LOffTwo;
 
-echo 'Command:' . '<br>'. '<br>';
+echo 'Command (ExampleOne):' . '<br>'. '<br>';
 
 // invoker to execute specific commands on a given receiver
 $remoteController = new RemoteController;
 // receiver, which is binded to the command at some point
 $room = new Room;
-// command, binded receiver to the command
+// commands, bind receiver and commands
 $lightOnCommand = new LightOnCommand($room);
+$lightOffCommand = new LightOffCommand($room);
 
 // set command to execute
+$remoteController->setCommand($lightOnCommand);
+$remoteController->executeCommand();
+$remoteController->setCommand($lightOffCommand);
+$remoteController->executeCommand();
+$remoteController->setCommand($lightOnCommand);
+$remoteController->executeCommand();
+
+echo '<br>'. '<br>' . 'Command (ExampleTwo):' . '<br>'. '<br>';
+
+// invoker to execute specific commands on a given receiver
+$remoteController = new RCTwo;
+// receiver, which is binded to the command at some point
+$room = new RTwo;
+// commands, bind receiver and commands
+$lightOnCommand = new LOnTwo($room);
+$lightOffCommand = new LOffTwo($room);
+
+// set command to execute
+$remoteController->setCommand($lightOnCommand);
+$remoteController->executeCommand();
+$remoteController->undoCommand();
+$remoteController->setCommand($lightOffCommand);
+$remoteController->executeCommand();
+$remoteController->undoCommand();
 $remoteController->setCommand($lightOnCommand);
 $remoteController->executeCommand();
 
