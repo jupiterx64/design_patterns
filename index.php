@@ -551,3 +551,53 @@ $remoteController->executeCommand();
 
 echo '<hr>';
 #### END OF COMMAND ####
+
+#### VISITOR ####
+# Quoting GoF:
+# "Allows for one or more operation to be applied to a set of objects at runtime,
+# decoupling the operations from the object structure"
+#
+# Add functionality to classes without changing the original structure (can be done at runetime)
+# Move some logic from functions to a class
+#
+# Each specific visitor holds the logic to compute for each specific element/class
+# Each specific element/class calls the method from visitor to compute the logic
+# Visitor usually replaces element's/class's function logic with class (visitor itself) (so move logic from function to class)
+#
+# Say we have collection of items, and want to perform some operations on all of them,
+# but the items do not have to be of the same type! 
+
+use DP\Behavioral\Visitor\Tax\AddTaxVisitor;
+use DP\Behavioral\Visitor\Wrap\WrapVisitor;
+use DP\Behavioral\Visitor\Visitables\Bread as BreadElement;
+use DP\Behavioral\Visitor\Visitables\Milk as MilkElement;
+
+echo 'Visitor:' . '<br>'. '<br>';
+
+$addTax = new AddTaxVisitor;
+$wrap = new WrapVisitor;
+$bread = new BreadElement;
+$milk = new MilkElement;
+
+echo 'Original bread price: ' . $bread->getPrice() . '<br>';
+echo 'Original milk price: ' . $milk->getPrice() . '<br>';
+
+$bread->processTaxing($addTax);
+$milk->processTaxing($addTax);
+
+echo 'After taxing bread price: ' . $bread->getPrice() . '<br>';
+echo 'After taxing milk price: ' . $milk->getPrice() . '<br>';
+
+echo '<br>';
+
+echo 'Original bread wrap: ' . $bread->getWrap() . '<br>';
+echo 'Original milk wrap: ' . $milk->getWrap() . '<br>';
+
+$bread->wrap($wrap);
+$milk->wrap($wrap);
+
+echo 'After wrapping bread: ' . $bread->getWrap() . '<br>';
+echo 'After wrapping milk: ' . $milk->getWrap() . '<br>';
+
+echo '<hr>';
+#### END OF VISITOR ####
