@@ -563,6 +563,9 @@ echo '<hr>';
 # Each specific visitor holds the logic to compute for each specific element/class
 # Each specific element/class calls the method from visitor to compute the logic
 # Visitor usually replaces element's/class's function logic with class (visitor itself) (so move logic from function to class)
+#
+# Say we have collection of items, and want to perform some operations on all of them,
+# but the items do not have to be of the same type! 
 
 use DP\Behavioral\Visitor\Tax\AddTaxVisitor;
 use DP\Behavioral\Visitor\Wrap\WrapVisitor;
