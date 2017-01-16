@@ -7,7 +7,7 @@ use DP\Behavioral\Visitor\Tax\IAddTaxVisitor;
 use DP\Behavioral\Visitor\Wrap\IWrappable;
 use DP\Behavioral\Visitor\Wrap\IWrapVisitor;
 
-class Bread implements ITaxable
+class Bread implements ITaxable, IWrappable
 {
     private $price;
     private $wrap;
