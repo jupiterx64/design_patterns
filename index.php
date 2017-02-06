@@ -565,7 +565,10 @@ echo '<hr>';
 # Visitor usually replaces element's/class's function logic with class (visitor itself) (so move logic from function to class)
 #
 # Say we have collection of items, and want to perform some operations on all of them,
-# but the items do not have to be of the same type! 
+# but the items do not have to be of the same type!
+#
+# Another positive thing, we decouple interface dependencies from visitor, so the element/class does not depend on all functions,
+# only those from the visitor itself, while the visitor itself depends on a bunch of functions
 
 use DP\Behavioral\Visitor\Tax\AddTaxVisitor;
 use DP\Behavioral\Visitor\Wrap\WrapVisitor;

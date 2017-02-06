@@ -7,6 +7,7 @@ use DP\Behavioral\Visitor\Tax\IAddTaxVisitor;
 use DP\Behavioral\Visitor\Wrap\IWrappable;
 use DP\Behavioral\Visitor\Wrap\IWrapVisitor;
 
+// use visitors to handle operations because visitors holds logic part
 class Bread implements ITaxable, IWrappable
 {
     private $price;
